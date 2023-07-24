@@ -1,21 +1,23 @@
-import React, { useContext } from "react";
+import { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import SignIn from "../Pages/SignIn/Signin";
 import SignUp from "../Pages/SignUp/Signup";
 import Splash from "../Pages/Splash/Splash";
 import Todo from "../Pages/Todo/Todo";
 import NotFound from "../Pages/NotFound/NotFound";
-import { UserContext } from "../Pages/context/UserContext";
 import Category from "../Pages/category/Category";
-import Loading from "../Pages/Loading/Loading";
+import { tokenState } from "../recoil/atoms";
 
 export default function Router() {
-  const token = useContext(UserContext)?.token;
-  const isLoading = useContext(UserContext)?.isLoading;
+  const [token, setToken] = useRecoilState(tokenState);
 
-  if (isLoading) {
-    return <Loading />;
-  }
+  useEffect(() => {
+    const storedToken = localStorage.getItem("access_token");
+    if (storedToken) {
+      setToken(storedToken);
+    }
+  }, []);
 
   return (
     <BrowserRouter>

@@ -1,4 +1,5 @@
 import { MouseEvent } from "react";
+import { useSetRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Button from "../../Component/Button/Button";
@@ -9,8 +10,7 @@ import { customAuthAxios } from "../../API/customAxios";
 import Logout from "../../assets/images/logout.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse } from "@fortawesome/free-solid-svg-icons";
-import { UserContext } from "../context/UserContext";
-import { useContext } from "react";
+import { tokenState } from "../../recoil/atoms";
 
 export interface TodoItem {
   id: number;
@@ -23,14 +23,9 @@ function Todo() {
   const [showInp, setShowInp] = useState<boolean>(false);
   const [todoList, setTodoList] = useState<TodoItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const setToken = useSetRecoilState(tokenState);
 
-  const userContext = useContext(UserContext);
   const navigate = useNavigate();
-
-  if (!userContext) {
-    throw new Error("UserContext is null");
-  }
-  const { setToken } = userContext;
 
   const handleShowInput = () => {
     setShowInp(true);
@@ -65,10 +60,8 @@ function Todo() {
 
   const handleLogout = () => {
     localStorage.removeItem("access_token");
-    setToken(() => {
-      navigate("/");
-      return null;
-    });
+    setToken("");
+    navigate("/");
   };
 
   if (isLoading) {
