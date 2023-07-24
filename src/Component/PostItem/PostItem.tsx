@@ -57,12 +57,6 @@ function PostItem({
 
       try {
         await customAuthAxios.put(`todos/${todoId}`, updateData);
-        //const updatedItem = updateRes.data;
-        //setTodoList(
-        //  todoList.map((todoItem) =>
-        //    todoItem.id === todoId ? updatedItem : todoItem
-        //  )
-        //);
       } catch (error) {
         console.log(error);
       }
