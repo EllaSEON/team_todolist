@@ -1,10 +1,11 @@
-import { useContext, useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../context/UserContext";
+import { useRecoilValue } from "recoil";
+import { tokenState } from "../../recoil/atoms";
 
 function Splash() {
   const navigate = useNavigate();
-  const token = useContext(UserContext)?.token;
+  const token = useRecoilValue(tokenState);
 
   useEffect(() => {
     setTimeout(() => {

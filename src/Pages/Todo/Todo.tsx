@@ -1,4 +1,5 @@
 import { MouseEvent } from "react";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Button from "../../Component/Button/Button";
@@ -9,8 +10,7 @@ import { customAuthAxios } from "../../API/customAxios";
 import Logout from "../../assets/images/logout.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse } from "@fortawesome/free-solid-svg-icons";
-import { UserContext } from "../context/UserContext";
-import { useContext } from "react";
+import { tokenState, todoItemState } from "../../recoil/atoms";
 
 export interface TodoItem {
   id: number;
@@ -21,16 +21,11 @@ export interface TodoItem {
 
 function Todo() {
   const [showInp, setShowInp] = useState<boolean>(false);
-  const [todoList, setTodoList] = useState<TodoItem[]>([]);
+  const [todoItem, setTodoItem] = useRecoilState<TodoItem[]>(todoItemState);
   const [isLoading, setIsLoading] = useState(true);
+  const setToken = useSetRecoilState(tokenState);
 
-  const userContext = useContext(UserContext);
   const navigate = useNavigate();
-
-  if (!userContext) {
-    throw new Error("UserContext is null");
-  }
-  const { setToken } = userContext;
 
   const handleShowInput = () => {
     setShowInp(true);
@@ -40,7 +35,7 @@ function Todo() {
     try {
       const todoRes = await customAuthAxios.get("todos");
       if (todoRes) {
-        setTodoList(todoRes.data);
+        setTodoItem(todoRes.data);
         setIsLoading(false);
       }
     } catch (error) {
@@ -65,10 +60,8 @@ function Todo() {
 
   const handleLogout = () => {
     localStorage.removeItem("access_token");
-    setToken(() => {
-      navigate("/");
-      return null;
-    });
+    setToken("");
+    navigate("/");
   };
 
   if (isLoading) {
@@ -104,13 +97,13 @@ function Todo() {
             </p>
           </div>
           <ul className="h-fit max-h-450 pt-5 pb-5 pr-10 pl-10 grid grid-cols-2 gap-4 overflow-y-scroll">
-            {todoList.map((postIt) => {
+            {todoItem.map((postIt) => {
               return (
                 <PostItem
                   key={postIt.id}
                   todoId={postIt.id}
-                  todoList={todoList}
-                  setTodoList={setTodoList}
+                  todoList={todoItem}
+                  setTodoList={setTodoItem}
                   isCompleted={postIt.isCompleted}
                 >
                   {postIt.todo}
@@ -138,7 +131,7 @@ function Todo() {
 
         {showInp && (
           <section className="w-96  mt-5 flex-row text-lx">
-            <SelectInputBox todoList={todoList} setTodoList={setTodoList} />{" "}
+            <SelectInputBox todoList={todoItem} setTodoList={setTodoItem} />{" "}
           </section>
         )}
       </div>

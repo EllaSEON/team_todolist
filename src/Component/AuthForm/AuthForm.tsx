@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { customAxios } from "../../API/customAxios";
 import { useNavigate, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { faEyeSlash } from "@fortawesome/free-regular-svg-icons";
-import { useContext } from "react";
-import { UserContext } from "../../Pages/context/UserContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { tokenState } from "../../recoil/atoms";
 
 type MyFormData = {
   email: string;
@@ -18,8 +18,8 @@ type MyFormData = {
 };
 
 function AuthForm() {
+  const setToken = useSetRecoilState(tokenState);
   const notify = (message: string) => toast.error(message);
-
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -38,15 +38,6 @@ function AuthForm() {
   const togglePasswordVisibility = () => {
     setInputType(inputType === "password" ? "text" : "password");
   };
-
-  const userContext = useContext(UserContext);
-
-  if (!userContext) {
-    // Error handling code here. For example:
-    throw new Error("UserContext is null");
-  }
-
-  const { setToken } = userContext;
 
   const onSubmitHandler: SubmitHandler<MyFormData> = async (data) => {
     try {
