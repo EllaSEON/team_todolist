@@ -2,15 +2,16 @@ import { MouseEvent } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Button from "../../Component/Button/Button";
-import PostItem from "../../Component/PostItem/PostItem";
-import SelectInputBox from "../../Component/SelectInputBox/SelectInputBox";
+import Button from "../../Component/Button";
+import PostItem from "../../Component/PostItem";
+import SelectInputBox from "../../Component/SelectInputBox";
 import Loading from "../Loading/Loading";
 import { customAuthAxios } from "../../API/customAxios";
 import Logout from "../../assets/images/logout.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse } from "@fortawesome/free-solid-svg-icons";
 import { tokenState, todoItemState } from "../../recoil/atoms";
+import KakaoShare from "../../Component/SharedBtn";
 
 export interface TodoItem {
   id: number;
@@ -22,6 +23,7 @@ export interface TodoItem {
 function Todo() {
   const [showInp, setShowInp] = useState<boolean>(false);
   const [todoItem, setTodoItem] = useRecoilState<TodoItem[]>(todoItemState);
+  console.log(todoItem);
   const [isLoading, setIsLoading] = useState(true);
   const setToken = useSetRecoilState(tokenState);
 
@@ -70,6 +72,7 @@ function Todo() {
     return (
       <div className="bg-main_skyblue flex flex-col justify-center items-center h-screen">
         <aside className="w-98 text-right mr-5 mb-5">
+          <KakaoShare />
           <FontAwesomeIcon
             icon={faHouse}
             className="cursor-pointer mr-3 "

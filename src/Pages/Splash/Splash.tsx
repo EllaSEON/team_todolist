@@ -14,15 +14,17 @@ function Splash() {
       } else {
         navigate("/todo");
       }
-    }, 1500);
+    }, 2000);
   }, [token, navigate]);
 
   return (
     <div className="bg-main_skyblue flex flex-col justify-center items-center h-screen">
       <h1 className="animate-bounce text-6xl font-mono font-bold text-center	">
-        To Do List <br />
-        for P
+        Tost It
       </h1>
+      <p className="animate-bounce">
+        아침/점심/저녁의 할일을 포스트잇에 붙여보세요~
+      </p>
     </div>
   );
 }

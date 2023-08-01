@@ -2,8 +2,8 @@ import { useEffect, useRef } from "react";
 import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import Button from "../../Component/Button/Button";
-import PostItem from "../../Component/PostItem/PostItem";
+import Button from "../../Component/Button";
+import PostItem from "../../Component/PostItem";
 import { TodoItem } from "../Todo/Todo";
 import { todoItemState } from "../../recoil/atoms";
 
@@ -12,7 +12,6 @@ function Category() {
   const { state } = useLocation();
   const [todoItem, setTodoItem] = useRecoilState(todoItemState);
   const timeState = useRef("");
-  
 
   useEffect(() => {
     if (state === "아침") {
