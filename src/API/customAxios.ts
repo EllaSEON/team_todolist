@@ -20,13 +20,9 @@ customAuthAxios.interceptors.request.use(
     const accessToken = JSON.parse(
       JSON.stringify(localStorage.getItem("access_token"))
     );
-    //const loginInfoString = localStorage.getItem("access_token");
-    //const loginInfo = loginInfoString ? JSON.parse(loginInfoString) : null;
 
     if (accessToken) {
-      //const accessToken = loginInfo.access_token;
       config.headers["Authorization"] = `Bearer ${accessToken}`;
-      //config.headers.common["Refresh-Token"] = `Bearer ${refreshToken}`;
     }
     return config;
   },

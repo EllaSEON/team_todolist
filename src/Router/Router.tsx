@@ -7,6 +7,7 @@ import Splash from "../Pages/Splash/Splash";
 import Todo from "../Pages/Todo/Todo";
 import NotFound from "../Pages/NotFound/NotFound";
 import Category from "../Pages/category/Category";
+import Result from "../Pages/Result/Result";
 import { tokenState } from "../recoil/atoms";
 
 export default function Router() {
@@ -23,6 +24,7 @@ export default function Router() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Splash />} />
+        <Route path="/todo/result" element={<Result />} />
 
         {token ? (
           <>

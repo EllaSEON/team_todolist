@@ -2,14 +2,14 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { customAxios } from "../../API/customAxios";
+import { customAxios } from "../API/customAxios";
 import { useNavigate, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { faEyeSlash } from "@fortawesome/free-regular-svg-icons";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { tokenState } from "../../recoil/atoms";
+import { tokenState } from "../recoil/atoms";
 
 type MyFormData = {
   email: string;
