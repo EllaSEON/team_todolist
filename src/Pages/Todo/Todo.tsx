@@ -23,6 +23,7 @@ export interface TodoItem {
 function Todo() {
   const [showInp, setShowInp] = useState<boolean>(false);
   const [todoItem, setTodoItem] = useRecoilState<TodoItem[]>(todoItemState);
+  console.log(todoItem);
   const [isLoading, setIsLoading] = useState(true);
   const setToken = useSetRecoilState(tokenState);
 
