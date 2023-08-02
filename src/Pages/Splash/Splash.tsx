@@ -19,7 +19,7 @@ function Splash() {
 
   return (
     <div className="bg-main_skyblue flex flex-col justify-center items-center h-screen">
-      <h1 className="animate-bounce text-6xl font-mono font-bold text-center	">
+      <h1 className="animate-bounce text-6xl font-bold text-center font-['Alfa Slab One']	">
         Tost It
       </h1>
       <p className="animate-bounce">

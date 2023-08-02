@@ -43,7 +43,7 @@ function Result() {
     }
   });
 
-  const realUrl = "https://tostit.vercel.app/todo/result"; //배포사이트
+  // const realUrl = "https://tostit.vercel.app/result"; //배포사이트
   const resultUrl = window.location.href; // 현재 url 가져오기
 
   //재렌더링시에 실행되게 해준다.
@@ -81,8 +81,8 @@ function Result() {
         {
           title: "나머지 한 일 목록 구경하기",
           link: {
-            mobileWebUrl: realUrl,
-            webUrl: realUrl,
+            mobileWebUrl: resultUrl,
+            webUrl: resultUrl,
           },
         },
       ],

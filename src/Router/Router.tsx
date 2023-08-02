@@ -24,7 +24,7 @@ export default function Router() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Splash />} />
-        <Route path="/todo/result" element={<Result />} />
+        <Route path="/result" element={<Result />} />
 
         {token ? (
           <>
