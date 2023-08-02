@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import { TodoItem } from "../Pages/Todo/Todo";
+import { TodoItem } from "../Pages/Todo";
 import { recoilPersist } from "recoil-persist";
 
 const { persistAtom } = recoilPersist();

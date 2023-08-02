@@ -2,10 +2,11 @@ import { useEffect, useRef } from "react";
 import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import Button from "../../Component/Button";
-import PostItem from "../../Component/PostItem";
-import { TodoItem } from "../Todo/Todo";
-import { todoItemState } from "../../recoil/atoms";
+import Button from "../Component/Button";
+import PostItem from "../Component/PostItem";
+import { TodoItem } from "./Todo";
+import { todoItemState } from "../recoil/atoms";
+import CommonInnerLayout from "../Component/Layout/CommonInnerLayout";
 
 function Category() {
   const navigate = useNavigate();
@@ -39,29 +40,22 @@ function Category() {
   }, [state]);
 
   return (
-    <div className="bg-main_skyblue flex flex-col justify-center items-center h-screen">
-      <section className="bg-main_bg_cloud max-w-7xl w-98 mb-5 rounded-xl h-600 relative">
-        <div className="sticky top-0 pb-5 rounded-t-xl bg-main_bg_cloud ">
-          <h1 className="font-mono pt-9 text-4xl text-center font-bold">
-            {timeState.current}
-          </h1>
-          <ul className="h-fit max-h-450 pt-5 pb-5 pr-10 pl-10 grid grid-cols-2 gap-4 overflow-y-scroll">
-            {todoItem.map((postIt: TodoItem) => {
-              return (
-                <PostItem
-                  key={postIt.id}
-                  todoId={postIt.id}
-                  todoList={todoItem}
-                  setTodoList={setTodoItem}
-                  isCompleted={postIt.isCompleted}
-                >
-                  {postIt.todo}
-                </PostItem>
-              );
-            })}
-          </ul>
-        </div>
-      </section>
+    <>
+      <CommonInnerLayout title={timeState.current}>
+        {todoItem.map((postIt: TodoItem) => {
+          return (
+            <PostItem
+              key={postIt.id}
+              todoId={postIt.id}
+              todoList={todoItem}
+              setTodoList={setTodoItem}
+              isCompleted={postIt.isCompleted}
+            >
+              {postIt.todo}
+            </PostItem>
+          );
+        })}
+      </CommonInnerLayout>
       <Button
         size="large"
         onClick={() => {
@@ -70,7 +64,7 @@ function Category() {
       >
         이전으로
       </Button>
-    </div>
+    </>
   );
 }
 

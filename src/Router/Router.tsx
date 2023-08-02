@@ -1,14 +1,16 @@
 import { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import SignIn from "../Pages/SignIn/Signin";
-import SignUp from "../Pages/SignUp/Signup";
-import Splash from "../Pages/Splash/Splash";
-import Todo from "../Pages/Todo/Todo";
-import NotFound from "../Pages/NotFound/NotFound";
-import Category from "../Pages/category/Category";
-import Result from "../Pages/Result/Result";
+import SignIn from "../Pages/Signin";
+import SignUp from "../Pages/Signup";
+import Splash from "../Pages/Splash";
+import Todo from "../Pages/Todo";
+import NotFound from "../Pages/NotFound";
+import Category from "../Pages/Category";
+import ProviderResult from "../Pages/ProviderResult";
+import ConsumerResult from "../Pages/ConsumerResult";
 import { tokenState } from "../recoil/atoms";
+import CommonOuterLayout from "../Component/Layout/CommonOuterLayout";
 
 export default function Router() {
   const [token, setToken] = useRecoilState(tokenState);
@@ -24,12 +26,15 @@ export default function Router() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Splash />} />
-        <Route path="/result" element={<Result />} />
+        <Route path="/result" element={<ConsumerResult />} />
 
         {token ? (
           <>
-            <Route path="/todo" element={<Todo />} />
-            <Route path="/todo/category" element={<Category />} />
+            <Route element={<CommonOuterLayout />}>
+              <Route path="/todo" element={<Todo />} />
+              <Route path="/todo/category" element={<Category />} />
+              <Route path="/todo/result/:userId" element={<ProviderResult />} />
+            </Route>
           </>
         ) : (
           <>

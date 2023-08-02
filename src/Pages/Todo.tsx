@@ -2,22 +2,23 @@ import { MouseEvent } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Button from "../../Component/Button";
-import PostItem from "../../Component/PostItem";
-import SelectInputBox from "../../Component/SelectInputBox";
-import Loading from "../Loading/Loading";
-import { customAuthAxios } from "../../API/customAxios";
-import Logout from "../../assets/images/logout.svg";
+import Button from "../Component/Button";
+import PostItem from "../Component/PostItem";
+import SelectInputBox from "../Component/SelectInputBox";
+import Loading from "./Loading";
+import { customAuthAxios } from "../API/customAxios";
+import Logout from "../assets/images/logout.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse } from "@fortawesome/free-solid-svg-icons";
-import { tokenState, todoItemState } from "../../recoil/atoms";
-import KakaoShare from "../../Component/SharedBtn";
+import { tokenState, todoItemState } from "../recoil/atoms";
+import SharedBtn from "../Component/SharedBtn";
+import CommonInnerLayout from "../Component/Layout/CommonInnerLayout";
 
 export interface TodoItem {
   id: number;
   todo: string;
   isCompleted: boolean;
-  useId: number;
+  userId: number;
 }
 
 function Todo() {
@@ -70,9 +71,9 @@ function Todo() {
     return <Loading />;
   } else {
     return (
-      <div className="bg-main_skyblue flex flex-col justify-center items-center h-screen">
+      <>
         <aside className="w-98 text-right mr-5 mb-5">
-          <KakaoShare />
+          <SharedBtn />
           <FontAwesomeIcon
             icon={faHouse}
             className="cursor-pointer mr-3 "
@@ -87,34 +88,24 @@ function Todo() {
             onClick={handleLogout}
           />
         </aside>
-        <section className="bg-main_bg_cloud max-w-7xl w-98 rounded-xl h-600 relative">
-          <div className="sticky top-0 pb-5 rounded-t-xl bg-main_bg_cloud ">
-            <h1
-              className="font-mono pl-10 pt-9 text-3xl font-semibold cursor-pointer"
-              onClick={handleRefresh}
-            >
-              Today
-            </h1>
-            <p className="font-mono  pl-10 pt-3 text-sm">
-              What are you working on today?
-            </p>
-          </div>
-          <ul className="h-fit max-h-450 pt-5 pb-5 pr-10 pl-10 grid grid-cols-2 gap-4 overflow-y-scroll">
-            {todoItem.map((postIt) => {
-              return (
-                <PostItem
-                  key={postIt.id}
-                  todoId={postIt.id}
-                  todoList={todoItem}
-                  setTodoList={setTodoItem}
-                  isCompleted={postIt.isCompleted}
-                >
-                  {postIt.todo}
-                </PostItem>
-              );
-            })}
-          </ul>
-        </section>
+        <CommonInnerLayout
+          title="Today"
+          description=" What are you working on today?"
+        >
+          {todoItem.map((postIt) => {
+            return (
+              <PostItem
+                key={postIt.id}
+                todoId={postIt.id}
+                todoList={todoItem}
+                setTodoList={setTodoItem}
+                isCompleted={postIt.isCompleted}
+              >
+                {postIt.todo}
+              </PostItem>
+            );
+          })}
+        </CommonInnerLayout>
         {!showInp && (
           <section className="w-96  mt-5 flex-row text-lx">
             <Button size="small" onClick={handleViewCategory}>
@@ -137,7 +128,7 @@ function Todo() {
             <SelectInputBox todoList={todoItem} setTodoList={setTodoItem} />{" "}
           </section>
         )}
-      </div>
+      </>
     );
   }
 }

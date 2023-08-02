@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
-import { tokenState } from "../../recoil/atoms";
+import { tokenState } from "../recoil/atoms";
 
 function Splash() {
   const navigate = useNavigate();

@@ -4,7 +4,7 @@ import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { customAuthAxios } from "../API/customAxios";
-import { TodoItem } from "../Pages/Todo/Todo";
+import { TodoItem } from "../Pages/Todo";
 
 interface PostItemProps {
   children: string;
