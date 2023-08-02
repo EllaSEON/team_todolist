@@ -33,7 +33,7 @@ export default function Router() {
             <Route element={<CommonOuterLayout />}>
               <Route path="/todo" element={<Todo />} />
               <Route path="/todo/category" element={<Category />} />
-              <Route path="/todo/result/:userId" element={<ProviderResult />} />
+              <Route path="/todo/result" element={<ProviderResult />} />
             </Route>
           </>
         ) : (

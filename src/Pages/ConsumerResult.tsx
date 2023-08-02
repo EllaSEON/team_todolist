@@ -5,7 +5,7 @@ import CommonInnerLayout from "../Component/Layout/CommonInnerLayout";
 function ConsumerResult() {
   return (
     <div className="bg-main_skyblue flex flex-col justify-center items-center h-screen ">
-      <CommonInnerLayout title={"a list of todays'work"}>
+      <CommonInnerLayout title={"오늘 나 이만큼이나 했어😌"}>
         {mockTodoList.map((postIt) => {
           return (
             <ResultPostItem key={postIt.id} timeTypes={postIt.todo.slice(-1)}>

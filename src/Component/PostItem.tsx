@@ -5,6 +5,8 @@ import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { customAuthAxios } from "../API/customAxios";
 import { TodoItem } from "../Pages/Todo";
+import { useRecoilState } from "recoil";
+import { todoItemState } from "../recoil/atoms";
 
 interface PostItemProps {
   children: string;
@@ -25,6 +27,7 @@ function PostItem({
   const timeType = children.slice(-1);
   const content = children.slice(0, len - 1);
 
+  const [, setTodoItem] = useRecoilState(todoItemState);
   const [updateToggle, setUpdateToggle] = useState(false);
   const [updatedContent, setUpdatedContent] = useState(content);
   const [isCompletedTodo, setIsCompletedTodo] = useState(isCompleted);
@@ -71,10 +74,15 @@ function PostItem({
     };
     try {
       await customAuthAxios.put(`todos/${todoId}`, updateData);
+      setIsCompletedTodo((prev) => !prev);
+      setTodoItem((prevTodos) =>
+        prevTodos.map((todo) =>
+          todo.id === todoId ? { ...todo, isCompleted: !isCompleted } : todo
+        )
+      );
     } catch (error) {
       console.log(error);
     }
-    setIsCompletedTodo((prev) => !prev);
   };
 
   useEffect(() => {
