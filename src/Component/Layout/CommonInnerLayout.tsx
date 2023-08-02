@@ -23,7 +23,7 @@ function CommonInnerLayout({
           <p className="font-mono text-center mt-3 text-lg">{description}</p>
         )}
       </div>
-      <ul className="h-fit max-h-450 pt-4 pb-5 pr-10 pl-10 grid grid-cols-2 gap-4 overflow-y-scroll">
+      <ul className="h-fit max-h-450 pt-5 pb-5 pr-10 pl-10 grid grid-cols-2 gap-4 overflow-y-scroll">
         {children}
       </ul>
     </section>

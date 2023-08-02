@@ -1,5 +1,5 @@
 import { MouseEvent } from "react";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Button from "../Component/common/Button";
@@ -7,12 +7,11 @@ import PostItem from "../Component/PostItem";
 import SelectInputBox from "../Component/SelectInputBox";
 import Loading from "./Loading";
 import { customAuthAxios } from "../API/customAxios";
-import Logout from "../assets/images/logout.svg";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHouse } from "@fortawesome/free-solid-svg-icons";
-import { tokenState, todoItemState } from "../recoil/atoms";
+import { todoItemState } from "../recoil/atoms";
 import SharedBtn from "../Component/SharedBtn";
 import CommonInnerLayout from "../Component/Layout/CommonInnerLayout";
+import LogoutBtn from "../Component/LogoutBtn";
+import HomeBtn from "../Component/HomeBtn";
 
 export interface TodoItem {
   id: number;
@@ -25,7 +24,6 @@ function Todo() {
   const [showInp, setShowInp] = useState<boolean>(false);
   const [todoItem, setTodoItem] = useRecoilState<TodoItem[]>(todoItemState);
   const [isLoading, setIsLoading] = useState(true);
-  const setToken = useSetRecoilState(tokenState);
 
   const navigate = useNavigate();
 
@@ -56,16 +54,6 @@ function Todo() {
     });
   };
 
-  const handleRefresh = () => {
-    location.reload();
-  };
-
-  const handleLogout = () => {
-    localStorage.removeItem("access_token");
-    setToken("");
-    navigate("/");
-  };
-
   if (isLoading) {
     return <Loading />;
   } else {
@@ -73,19 +61,8 @@ function Todo() {
       <>
         <aside className="w-98 text-right mr-5 mb-5">
           <SharedBtn />
-          <FontAwesomeIcon
-            icon={faHouse}
-            className="cursor-pointer mr-3 "
-            style={{ color: "#50b4fc" }}
-            size="xl"
-            onClick={handleRefresh}
-          />
-          <img
-            src={Logout}
-            alt="로그아웃"
-            className="w-6 cursor-pointer inline"
-            onClick={handleLogout}
-          />
+          <HomeBtn />
+          <LogoutBtn />
         </aside>
         <CommonInnerLayout
           title="Today"
