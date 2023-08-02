@@ -10,6 +10,7 @@ import Category from "../Pages/Category";
 import ProviderResult from "../Pages/ProviderResult";
 import ConsumerResult from "../Pages/ConsumerResult";
 import { tokenState } from "../recoil/atoms";
+import CommonOuterLayout from "../Component/Layout/CommonOuterLayout";
 
 export default function Router() {
   const [token, setToken] = useRecoilState(tokenState);
@@ -29,9 +30,11 @@ export default function Router() {
 
         {token ? (
           <>
-            <Route path="/todo" element={<Todo />} />
-            <Route path="/todo/category" element={<Category />} />
-            <Route path="/todo/result/:userId" element={<ProviderResult />} />
+            <Route element={<CommonOuterLayout />}>
+              <Route path="/todo" element={<Todo />} />
+              <Route path="/todo/category" element={<Category />} />
+              <Route path="/todo/result/:userId" element={<ProviderResult />} />
+            </Route>
           </>
         ) : (
           <>

@@ -5,7 +5,7 @@ import { TodoItem } from "./Todo";
 import { todoItemState } from "../recoil/atoms";
 import ResultPostItem from "../Component/ResultPostItem";
 import { useNavigate } from "react-router-dom";
-import CommonLayout from "../Component/CommonLayout";
+import CommonInnerLayout from "../Component/Layout/CommonInnerLayout";
 
 declare global {
   interface Window {
@@ -44,8 +44,8 @@ function ProviderResult() {
     }
   });
 
-  // const realUrl = "https://tostit.vercel.app/result"; //배포사이트
-  const resultUrl = window.location.href; // 현재 url 가져오기
+  const realUrl = "https://tostit.vercel.app/result"; //배포사이트
+  // const resultUrl = window.location.href; // 현재 url 가져오기
 
   //재렌더링시에 실행되게 해준다.
   useEffect(() => {
@@ -64,8 +64,8 @@ function ProviderResult() {
         title: "투스트 잇",
         imageUrl: "https://ifh.cc/g/xPjPz6.png",
         link: {
-          mobileWebUrl: resultUrl,
-          webUrl: resultUrl,
+          mobileWebUrl: realUrl,
+          webUrl: realUrl,
         },
       },
       itemContent: {
@@ -82,8 +82,8 @@ function ProviderResult() {
         {
           title: "나머지 한 일 목록 구경하기",
           link: {
-            mobileWebUrl: resultUrl,
-            webUrl: resultUrl,
+            mobileWebUrl: realUrl,
+            webUrl: realUrl,
           },
         },
       ],
@@ -96,7 +96,7 @@ function ProviderResult() {
 
   return (
     <div className="bg-main_skyblue flex flex-col justify-center items-center h-screen">
-      <CommonLayout title="Show off what you did today">
+      <CommonInnerLayout title="Show off what you did" textSize="text-2xl">
         {completedTodos.map((postIt) => {
           return (
             <ResultPostItem key={postIt.id} timeTypes={postIt.todo.slice(-1)}>
@@ -104,7 +104,7 @@ function ProviderResult() {
             </ResultPostItem>
           );
         })}
-      </CommonLayout>
+      </CommonInnerLayout>
       <div className="flex flex-col gap-y-3 mt-3 ">
         <Button size="large" onClick={handleShareKaKao}>
           카카오톡으로 공유하기
