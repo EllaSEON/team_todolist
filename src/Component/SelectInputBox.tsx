@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSquarePlus as plus } from "@fortawesome/free-solid-svg-icons";
 import { customAuthAxios } from "../API/customAxios";
-import { TodoItem } from "../Pages/Todo/Todo";
+import { TodoItem } from "../Pages/Todo";
 
 interface SelecInputBoxProps {
   todoList: TodoItem[];

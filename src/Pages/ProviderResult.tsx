@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
-import Button from "../../Component/Button";
-import { TodoItem } from "../Todo/Todo";
-import { todoItemState } from "../../recoil/atoms";
-import ResultPostItem from "../../Component/ResultPostItem";
+import Button from "../Component/Button";
+import { TodoItem } from "./Todo";
+import { todoItemState } from "../recoil/atoms";
+import ResultPostItem from "../Component/ResultPostItem";
 import { useNavigate } from "react-router-dom";
+import CommonLayout from "../Component/CommonLayout";
 
 declare global {
   interface Window {
@@ -16,7 +17,7 @@ declare global {
 const { REACT_APP_KAKAO_KEY } = process.env;
 const { Kakao } = window;
 
-function Result() {
+function ProviderResult() {
   const navigate = useNavigate();
   const [todoItem] = useRecoilState<TodoItem[]>(todoItemState);
   console.log(todoItem);
@@ -95,23 +96,16 @@ function Result() {
 
   return (
     <div className="bg-main_skyblue flex flex-col justify-center items-center h-screen">
-      <section className="bg-main_bg_cloud max-w-7xl w-98 rounded-xl h-600 relative">
-        <div className="sticky top-0 pb-5 rounded-t-xl bg-main_bg_cloud ">
-          <h1 className=" text-center pt-9 text-3xl font-semibold ">
-            오늘 한 일을 자랑해보세요
-          </h1>
-        </div>
-        <ul className="h-fit max-h-450 pt-11 pb-5 pr-10 pl-10 grid grid-cols-2 gap-4 overflow-y-scroll">
-          {completedTodos.map((postIt) => {
-            return (
-              <ResultPostItem key={postIt.id} timeTypes={postIt.todo.slice(-1)}>
-                {postIt.todo.slice(0, -1)}
-              </ResultPostItem>
-            );
-          })}
-        </ul>
-      </section>
-      <div className="flex flex-col gap-y-3 mt-5">
+      <CommonLayout title="Show off what you did today">
+        {completedTodos.map((postIt) => {
+          return (
+            <ResultPostItem key={postIt.id} timeTypes={postIt.todo.slice(-1)}>
+              {postIt.todo.slice(0, -1)}
+            </ResultPostItem>
+          );
+        })}
+      </CommonLayout>
+      <div className="flex flex-col gap-y-3 mt-3 ">
         <Button size="large" onClick={handleShareKaKao}>
           카카오톡으로 공유하기
         </Button>
@@ -123,4 +117,4 @@ function Result() {
   );
 }
 
-export default Result;
+export default ProviderResult;

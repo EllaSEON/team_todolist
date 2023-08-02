@@ -2,10 +2,10 @@ import { useEffect, useRef } from "react";
 import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import Button from "../../Component/Button";
-import PostItem from "../../Component/PostItem";
-import { TodoItem } from "../Todo/Todo";
-import { todoItemState } from "../../recoil/atoms";
+import Button from "../Component/Button";
+import PostItem from "../Component/PostItem";
+import { TodoItem } from "./Todo";
+import { todoItemState } from "../recoil/atoms";
 
 function Category() {
   const navigate = useNavigate();

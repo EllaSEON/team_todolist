@@ -2,22 +2,22 @@ import { MouseEvent } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Button from "../../Component/Button";
-import PostItem from "../../Component/PostItem";
-import SelectInputBox from "../../Component/SelectInputBox";
-import Loading from "../Loading/Loading";
-import { customAuthAxios } from "../../API/customAxios";
-import Logout from "../../assets/images/logout.svg";
+import Button from "../Component/Button";
+import PostItem from "../Component/PostItem";
+import SelectInputBox from "../Component/SelectInputBox";
+import Loading from "./Loading";
+import { customAuthAxios } from "../API/customAxios";
+import Logout from "../assets/images/logout.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse } from "@fortawesome/free-solid-svg-icons";
-import { tokenState, todoItemState } from "../../recoil/atoms";
-import KakaoShare from "../../Component/SharedBtn";
+import { tokenState, todoItemState } from "../recoil/atoms";
+import SharedBtn from "../Component/SharedBtn";
 
 export interface TodoItem {
   id: number;
   todo: string;
   isCompleted: boolean;
-  useId: number;
+  userId: number;
 }
 
 function Todo() {
@@ -72,7 +72,7 @@ function Todo() {
     return (
       <div className="bg-main_skyblue flex flex-col justify-center items-center h-screen">
         <aside className="w-98 text-right mr-5 mb-5">
-          <KakaoShare />
+          <SharedBtn />
           <FontAwesomeIcon
             icon={faHouse}
             className="cursor-pointer mr-3 "
