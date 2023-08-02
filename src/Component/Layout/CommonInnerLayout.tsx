@@ -15,7 +15,7 @@ function CommonInnerLayout({
     <section className="bg-main_bg_cloud max-w-7xl w-98 rounded-xl h-600 relative">
       <div className="sticky top-0 pb-5 rounded-t-xl bg-main_bg_cloud ">
         <h1
-          className={` text-center pt-9 font-semibold tracking-wider ${textSize}`}
+          className={` text-center pt-9 font-semibold tracking-widest ${textSize}`}
         >
           {title}
         </h1>

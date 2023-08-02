@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
-import Button from "../Component/Button";
+import Button from "../Component/common/Button";
 import { TodoItem } from "./Todo";
 import { todoItemState } from "../recoil/atoms";
 import ResultPostItem from "../Component/ResultPostItem";
@@ -58,10 +58,15 @@ function ProviderResult() {
   }, []);
 
   const handleShareKaKao = () => {
+    const items = todoNames.slice(0, 5).map((name, index) => ({
+      item: convertedTimeTypes[index],
+      itemOp: name,
+    }));
+
     Kakao.Share.sendDefault({
       objectType: "feed",
       content: {
-        title: "투스트 잇",
+        title: "오늘 나 이런 일 했는데 보러와!",
         imageUrl: "https://ifh.cc/g/xPjPz6.png",
         link: {
           mobileWebUrl: realUrl,
@@ -71,12 +76,7 @@ function ProviderResult() {
       itemContent: {
         profileText: "Tost It",
         profileImageUrl: "https://ifh.cc/g/aw0qmv.png",
-        items: [
-          {
-            item: convertedTimeTypes[0],
-            itemOp: todoNames[0],
-          },
-        ],
+        items: items,
       },
       buttons: [
         {
@@ -96,7 +96,10 @@ function ProviderResult() {
 
   return (
     <div className="bg-main_skyblue flex flex-col justify-center items-center h-screen">
-      <CommonInnerLayout title="Show off what you did" textSize="text-2xl">
+      <CommonInnerLayout
+        title="오늘 내가 한 일 자랑하러가기😎"
+        textSize="text-2xl"
+      >
         {completedTodos.map((postIt) => {
           return (
             <ResultPostItem key={postIt.id} timeTypes={postIt.todo.slice(-1)}>

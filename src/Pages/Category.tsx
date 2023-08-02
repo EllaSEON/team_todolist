@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import Button from "../Component/Button";
+import Button from "../Component/common/Button";
 import PostItem from "../Component/PostItem";
 import { TodoItem } from "./Todo";
 import { todoItemState } from "../recoil/atoms";
@@ -56,14 +56,16 @@ function Category() {
           );
         })}
       </CommonInnerLayout>
-      <Button
-        size="large"
-        onClick={() => {
-          navigate("/todo");
-        }}
-      >
-        이전으로
-      </Button>
+      <div className="mt-3">
+        <Button
+          size="large"
+          onClick={() => {
+            navigate("/todo");
+          }}
+        >
+          이전으로
+        </Button>
+      </div>
     </>
   );
 }

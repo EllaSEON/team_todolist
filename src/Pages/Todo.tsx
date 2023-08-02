@@ -2,7 +2,7 @@ import { MouseEvent } from "react";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Button from "../Component/Button";
+import Button from "../Component/common/Button";
 import PostItem from "../Component/PostItem";
 import SelectInputBox from "../Component/SelectInputBox";
 import Loading from "./Loading";
@@ -24,7 +24,6 @@ export interface TodoItem {
 function Todo() {
   const [showInp, setShowInp] = useState<boolean>(false);
   const [todoItem, setTodoItem] = useRecoilState<TodoItem[]>(todoItemState);
-  console.log(todoItem);
   const [isLoading, setIsLoading] = useState(true);
   const setToken = useSetRecoilState(tokenState);
 
