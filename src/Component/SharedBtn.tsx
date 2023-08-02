@@ -7,7 +7,7 @@ function SharedBtn() {
   const navigate = useNavigate();
 
   const handleMoveToResultPage = () => {
-    navigate("/todo/result");
+    navigate("/result");
   };
 
   return (
