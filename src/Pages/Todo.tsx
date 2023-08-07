@@ -12,6 +12,7 @@ import SharedBtn from "../Component/SharedBtn";
 import CommonInnerLayout from "../Component/Layout/CommonInnerLayout";
 import LogoutBtn from "../Component/LogoutBtn";
 import HomeBtn from "../Component/HomeBtn";
+import WeatherBtn from "../Component/WeatherBtn";
 
 export interface TodoItem {
   id: number;
@@ -59,7 +60,8 @@ function Todo() {
   } else {
     return (
       <>
-        <aside className="w-98 text-right mr-5 mb-5">
+        <aside className="flex justify-end w-98  mr-5 mb-5">
+          <WeatherBtn />
           <SharedBtn />
           <HomeBtn />
           <LogoutBtn />
