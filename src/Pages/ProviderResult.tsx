@@ -1,6 +1,7 @@
 import { useRecoilState } from "recoil";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { CopyToClipboard } from "react-copy-to-clipboard";
 import Button from "../Component/common/Button";
 import { TodoItem } from "./Todo";
 import { todoItemState } from "../recoil/atoms";
@@ -68,9 +69,12 @@ function ProviderResult() {
           todoNames={todoNames}
           convertedTimeTypes={convertedTimeTypes}
         />
-        <Button size="large" onClick={handleCopyUrl}>
-          url 복사하기
-        </Button>
+        <CopyToClipboard
+          text="https://tostit.vercel.app/result"
+          onCopy={handleCopyUrl}
+        >
+          <Button size="large">URL 복사하기</Button>
+        </CopyToClipboard>
         <Button size="large" onClick={handleMovePreviousPage}>
           뒤로가기
         </Button>
