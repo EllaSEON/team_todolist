@@ -30,7 +30,7 @@ function KakaoSharedBtn({
     // 자신의 js 키를 넣어준다.
     Kakao.init(REACT_APP_KAKAO_KEY);
     //잘 적용되면 true 를 뱉는다.
-    console.log(Kakao.isInitialized());
+    // console.log(Kakao.isInitialized());
   }, []);
 
   const handleShareKaKao = () => {

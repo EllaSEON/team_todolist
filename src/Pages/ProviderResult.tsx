@@ -1,4 +1,6 @@
 import { useRecoilState } from "recoil";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Button from "../Component/common/Button";
 import { TodoItem } from "./Todo";
 import { todoItemState } from "../recoil/atoms";
@@ -10,7 +12,7 @@ import KakaoSharedBtn from "../Component/KaKaoSharedBtn";
 function ProviderResult() {
   const navigate = useNavigate();
   const [todoItem] = useRecoilState<TodoItem[]>(todoItemState);
-  console.log(todoItem);
+  // console.log(todoItem);
 
   const completedTodos = todoItem.filter((item) => {
     return item.isCompleted === true;
@@ -33,6 +35,15 @@ function ProviderResult() {
         return "알 수 없음"; // 기본값 처리 (필요에 따라 변경 가능)
     }
   });
+
+  const handleCopyUrl = async () => {
+    try {
+      await navigator.clipboard.writeText("https://tostit.vercel.app/result");
+      toast.success("url이 복사되었습니다.");
+    } catch (error: any) {
+      toast.error("url 복사 실패");
+    }
+  };
 
   const handleMovePreviousPage = () => {
     navigate(-1);
@@ -57,10 +68,14 @@ function ProviderResult() {
           todoNames={todoNames}
           convertedTimeTypes={convertedTimeTypes}
         />
+        <Button size="large" onClick={handleCopyUrl}>
+          url 복사하기
+        </Button>
         <Button size="large" onClick={handleMovePreviousPage}>
           뒤로가기
         </Button>
       </div>
+      <ToastContainer />
     </div>
   );
 }
