@@ -1,7 +1,7 @@
-import { MouseEvent } from "react";
+import { MouseEvent, useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import dayjs from "dayjs";
 import Button from "../Component/common/Button";
 import PostItem from "../Component/PostItem";
 import SelectInputBox from "../Component/SelectInputBox";
@@ -27,6 +27,7 @@ function Todo() {
   const [isLoading, setIsLoading] = useState(true);
 
   const navigate = useNavigate();
+  const today = dayjs();
 
   const handleShowInput = () => {
     setShowInp(true);
@@ -60,12 +61,17 @@ function Todo() {
   } else {
     return (
       <>
-        <aside className="flex justify-end w-98  mr-5 mb-5">
-          <WeatherBtn />
-          <SharedBtn />
-          <HomeBtn />
-          <LogoutBtn />
-        </aside>
+        <div className="flex mb-5 gap-28">
+          <span className="font-extrabold">
+            {today.format("YYYY년 MM월 DD일")}
+          </span>
+          <aside className="flex">
+            <WeatherBtn />
+            <SharedBtn />
+            <HomeBtn />
+            <LogoutBtn />
+          </aside>
+        </div>
         <CommonInnerLayout
           title="Today"
           description=" What are you working on today?"
