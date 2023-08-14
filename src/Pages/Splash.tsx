@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { tokenState } from "../recoil/atoms";
+import logo from "../assets/images/Logo.svg";
 
 function Splash() {
   const navigate = useNavigate();
@@ -18,13 +19,18 @@ function Splash() {
   }, [token, navigate]);
 
   return (
-    <div className="bg-main_skyblue flex flex-col justify-center items-center h-screen">
-      <h1 className="animate-bounce text-6xl font-bold text-center font-['Alfa Slab One']	">
-        Tost It
-      </h1>
-      <p className="animate-bounce">
-        아침/점심/저녁의 할일을 포스트잇에 붙여보세요~
-      </p>
+    <div className="bg-main_skyblue">
+      <div className=" flex flex-col justify-center items-center h-screen">
+        <img
+          src={logo}
+          alt="투스트잍 로고"
+          className="w-52 h-52 animate-pulse"
+        />
+        <p className="mt-5 text-xl font-bold text-center animate-bounce">
+          투스트잍에 오늘의 할일을 <br />
+          아침 점심 저녁으로 나눠보자
+        </p>
+      </div>
     </div>
   );
 }

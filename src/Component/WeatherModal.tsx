@@ -4,6 +4,7 @@ import axios from "axios";
 import weatherDescKo from "../utils/weatherDescKo";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
+import LoadingSpinner from "../assets/images/loading.gif";
 
 interface WeatherModalProps {
   setIsModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -13,6 +14,7 @@ const { REACT_APP_WEATHER_KEY } = process.env;
 const BASE_URL = "https://api.openweathermap.org/data/2.5";
 
 function WeatherModal({ setIsModal }: WeatherModalProps) {
+  const [isLoading, setIsLoading] = useState(true);
   const [weather, setWeather] = useState({
     description: "",
     cityName: "",
@@ -57,6 +59,7 @@ function WeatherModal({ setIsModal }: WeatherModalProps) {
           temp: temp,
           icon: weatherIconAdrs,
         });
+        setIsLoading(false);
       } catch (error) {
         console.log(error);
       }
@@ -91,26 +94,33 @@ function WeatherModal({ setIsModal }: WeatherModalProps) {
       >
         X
       </button>
-      <div className="text-white flex flex-col justify-center items-center mt-12">
-        <div className="">
-          <FontAwesomeIcon
-            icon={faLocationDot}
-            style={{ color: "#ffffff" }}
-            size="2xl"
-            className="mr-3"
-          />
-          <span className="text-4xl font-bold align-middle ">
-            {weather.cityName}
-          </span>
+      {isLoading ? (
+        <div className="flex justify-center items-center h-full">
+          <img src={LoadingSpinner} alt="Loading..." />
         </div>
-        <img
-          src={weather.icon}
-          alt={weather.description}
-          className="text-4xl font-bold w-40 h-40"
-        />
-        <span className="mt-3 text-2xl font-bold">{weather.temp}º</span>
-        <span className="mt-3 text-2xl font-bold">{weather.description}</span>
-      </div>
+      ) : (
+        <div className="text-white flex flex-col justify-center items-center mt-12">
+          <div className="">
+            <FontAwesomeIcon
+              icon={faLocationDot}
+              style={{ color: "#ffffff" }}
+              size="2xl"
+              className="mr-3"
+            />
+
+            <span className="text-4xl font-bold align-middle ">
+              {weather.cityName}
+            </span>
+          </div>
+          <img
+            src={weather.icon}
+            alt={weather.description}
+            className="text-4xl font-bold w-40 h-40"
+          />
+          <span className="mt-3 text-2xl font-bold">{weather.temp}º</span>
+          <span className="mt-3 text-2xl font-bold">{weather.description}</span>
+        </div>
+      )}
     </div>
   );
 }

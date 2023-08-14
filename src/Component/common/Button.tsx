@@ -1,7 +1,7 @@
 import { MouseEvent } from "react";
 
 interface ButtonProps {
-  onClick: (event: MouseEvent<HTMLButtonElement>) => void;
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
   children: string;
   size?: "small" | "medium" | "large";
 }
