@@ -1,3 +1,5 @@
+### 제공된 API 서버 만료되어 Mock Data 추가할 예정
+
 # 투스트잇 Tost It !
 
 - 🔗[배포URL](https://todolist-tostit.vercel.app/)
