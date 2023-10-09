@@ -1,3 +1,3 @@
-const BASE_URL = "http://3.34.197.149";
+const BASE_URL = "https://api.lakeone.org/";
 
 export default BASE_URL;

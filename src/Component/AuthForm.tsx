@@ -56,12 +56,13 @@ function AuthForm() {
         }
       }
     } catch (error: any) {
-      console.log("로그인에러", error);
       let errMsg = error.response.data.message;
       if (errMsg === "Unauthorized") {
         errMsg = "비밀번호를 다시 확인해주세요.";
+      } else if (errMsg === "Network Error") {
+        notify(error.message);
       }
-      notify(errMsg);
+      notify(error.message);
     }
   };
   return (
