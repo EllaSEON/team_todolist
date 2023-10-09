@@ -56,19 +56,26 @@ function AuthForm() {
         }
       }
     } catch (error: any) {
+      console.log("로그인에러", error);
       let errMsg = error.response.data.message;
       if (errMsg === "Unauthorized") {
         errMsg = "비밀번호를 다시 확인해주세요.";
       }
       notify(errMsg);
-      console.log(error);
     }
   };
   return (
     <section className="flex flex-col justify-center items-center h-screen">
+      <div className="mb-12">
+        <p>테스트 계정</p>
+        <span>아이디 : test4321@test.com </span>
+        <br />
+        <span>비밀번호 : test123! </span>
+      </div>
       <h1 className="mb-10 h-7 font-medium text-2xl">
         {location.pathname === "/signin" ? "로그인" : "이메일로 회원가입"}
       </h1>
+
       <form onSubmit={handleSubmit(onSubmitHandler)} className="flex flex-col">
         <fieldset className="block mb-4">
           <label className="text-xs block" htmlFor="email">

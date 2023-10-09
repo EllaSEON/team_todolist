@@ -1,3 +1,3 @@
-const BASE_URL = "https://www.pre-onboarding-selection-task.shop/";
+const BASE_URL = "http://3.34.197.149";
 
 export default BASE_URL;
